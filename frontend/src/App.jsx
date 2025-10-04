@@ -1,52 +1,81 @@
 // App.jsx
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/navbar.jsx';
-import Sidebar from './components/sidebar.jsx';
-import Footer from './components/footer.jsx';
-import Home from './page/home.jsx';
-import Signup from './page/signup.jsx';
-import Login from './page/login.jsx';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+// Components
+import Navbar from "./components/navbar.jsx";
+import Sidebar from "./components/sidebar.jsx";
+import Footer from "./components/footer.jsx";
+
+// Pages
+import Home from "./page/home.jsx";
+import Signup from "./page/signup.jsx";
+import Login from "./page/login.jsx";
+import AdminPortal from "./page/admin/adminportal.jsx";
+import ManagerPortal from "./page/manager/managerportal.jsx";
+import EmployeePortal from "./page/employee/employeeportal.jsx";
+
+const MainLayout = ({ children }) => (
+  <div className="flex flex-col min-h-screen">
+    <Navbar />
+    <div className="flex flex-1">
+      <Sidebar />
+      <main className="flex-1 bg-gray-50 p-6">{children}</main>
+    </div>
+    <Footer />
+  </div>
+);
 
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
+      <Routes>
+        {/* Full layout pages */}
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <div><Home/></div>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/"
+          element={
+            <MainLayout>
+              <AdminPortal/>
+            </MainLayout>
+          }
+        />
+          <Route
+          path="/manager/"
+          element={
+            <MainLayout>
+              <ManagerPortal/>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/employee/"
+          element={
+            <MainLayout>
+              <EmployeePortal/>
+            </MainLayout>
+          }
+        />
 
+        {/* Full-screen pages (no navbar/sidebar/footer) */}
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
 
-        <Routes>
-          <Route path="/" element={<Navbar />} />
-        </Routes>
-
-        <div className="flex flex-1">
-
-          <Routes>
-            <Route path="/" element={<Sidebar />} />
-          </Routes>
-
-          <main className="flex-1 bg-gray-50 p-6">
-            <Routes>
-
-              <Route path="/" element={<Home />} />
-
-
-              <Route path="/signup" element={<Signup />} />
-
-       
-              <Route path="/login" element={<Login />} />
-
-
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </main>
-        </div>
-
-
-        <Routes>
-          <Route path="/" element={<Footer />} />
-        </Routes>
-
-      </div>
+        {/* Catch-all redirect */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </Router>
   );
 }

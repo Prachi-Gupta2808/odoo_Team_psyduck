@@ -1,10 +1,14 @@
 // components/Login.jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    portal: "", // portal selection
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -14,12 +18,19 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.email || !form.password) {
-      alert('Please fill in all fields!');
+
+    if (!form.email || !form.password || !form.portal) {
+      alert("Please fill all fields and select a portal!");
       return;
     }
-    console.log('Login data:', form);
-    alert('Login submitted! Check console.');
+
+    console.log("Login Data:", form);
+
+    // Redirect based on selected portal
+    if (form.portal === "Manager") navigate("/manager");
+    else if (form.portal === "Employee") navigate("/employee");
+    else if (form.portal === "Admin") navigate("/admin");
+    else alert("Invalid portal selected!");
   };
 
   return (
@@ -28,50 +39,77 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md"
       >
-        {/* App Branding */}
+        {/* Branding */}
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-blue-800/70">Ex-Tracker</h1>
-          <p className="text-gray-600 text-sm mt-1">
+          <p className="text-gray-500 text-sm mt-1">
             Track your expenses, stay on budget, and visualize your financial journey.
           </p>
         </div>
 
+        {/* Portal Selection */}
+        <div className="mb-4">
+          <label className="block mb-1 text-gray-700 text-sm">Select Portal</label>
+          <select
+            name="portal"
+            value={form.portal}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-800/70 text-sm"
+            required
+          >
+            <option value="">-- Select Portal --</option>
+            <option value="Admin">Admin</option>
+            <option value="Manager">Manager</option>
+            <option value="Employee">Employee</option>
+          </select>
+        </div>
+
         {/* Email Field */}
-        <label className="block mb-2 text-gray-700">Email</label>
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          className="w-full mb-4 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-800/70"
-          placeholder="you@example.com"
-          required
-        />
+        <div className="mb-3">
+          <label className="block mb-1 text-gray-700 text-sm">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="you@example.com"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-800/70 text-sm"
+            required
+          />
+        </div>
 
         {/* Password Field */}
-        <label className="block mb-2 text-gray-700">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full mb-6 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-800/70"
-          placeholder="********"
-          required
-        />
+        <div className="mb-6">
+          <label className="block mb-1 text-gray-700 text-sm">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="********"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-800/70 text-sm"
+            required
+          />
+        </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-800/70 hover:bg-blue-800/50 text-white py-2 rounded font-semibold transition"
+          className="w-full bg-blue-800/70 hover:bg-blue-800/50 text-white py-2 rounded font-semibold text-sm transition"
         >
           Login
         </button>
 
-        {/* Extra Links */}
-        <div className="mt-4 text-center text-gray-500 text-sm">
-          Don't have an account? <a href="#signup" className="text-blue-700 hover:underline">Sign Up</a>
-        </div>
+        {/* Signup Link */}
+        <p className="text-center text-gray-500 mt-3 text-sm">
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            className="text-blue-800 font-semibold cursor-pointer hover:underline"
+          >
+            Sign Up
+          </Link>
+        </p>
       </form>
     </div>
   );
