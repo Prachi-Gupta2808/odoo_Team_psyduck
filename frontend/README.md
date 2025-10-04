@@ -1,16 +1,41 @@
-# React + Vite
+# odoo_Team_psyduck - Ex-Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ex-Tracker is a **role-based expense management web application** built with React and Tailwind CSS. It allows Admins, Managers, and Employees to manage, approve, and track expenses seamlessly. The app provides role-specific dashboards, authentication, and interactive features like expense approval, analytics, and user management.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧩 Features
 
-## React Compiler
+### General
+- Minimalistic home page with Sign In / Sign Up.
+- Role-based dashboards: Admin, Manager, Employee.
+- Persistent login via `localStorage`.
+- Protected routes for different roles.
+- Logout functionality.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Admin
+- Add, remove, and manage users.
+- Change user passwords.
+- Monitor company-wide expenses.
+- Quick analytics of users and expenses.
 
-## Expanding the ESLint configuration
+### Manager
+- Approve or reject employee expense bills.
+- Add, remove, and manage team members.
+- Track team expenses and analytics.
+- Quick view of pending and approved bills.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Employee
+- Submit expense reports for approval.
+- Track reimbursement status.
+- View past expense submissions.
+
+---
+
+## 💻 Tech Stack
+- **Frontend:** React, Tailwind CSS, Framer Motion (animations)
+- **Icons:** Lucide React
+- **Routing:** React Router DOM
+- **State Management:** `useState` / `localStorage`
+
+> ⚡ Note: Backend APIs or database are not included in this version. Data is stored in memory or `localStorage` for demonstration purposes.
