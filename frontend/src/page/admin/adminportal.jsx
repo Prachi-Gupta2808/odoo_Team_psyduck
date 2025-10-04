@@ -1,10 +1,23 @@
-// page/adminportal.jsx
-import React from 'react';
-import { Settings, Users, FileText, BarChart2 } from 'lucide-react';
+// page/AdminPortal.jsx
+import React from "react";
+import { Settings, Users, FileText, BarChart2, LayoutDashboard } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AdminPortal = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="space-y-6">
+    <div className="relative space-y-6">
+    {/* Dashboard icon in top-right */}
+<button
+  onClick={() => navigate("/admin/dashboard/")}
+  className="absolute top-4 right-4 flex items-center space-x-2 px-3 py-2 rounded-full bg-blue-100 hover:bg-blue-200 transition"
+  title="Go to Dashboard"
+>
+  <LayoutDashboard className="h-5 w-5 text-blue-700" />
+  <span className="text-blue-700 font-medium text-sm">Dashboard</span>
+</button>
+
       <h1 className="text-3xl font-bold text-blue-800/70 flex items-center">
         <Settings className="h-6 w-6 mr-2 text-teal-600" /> Admin Portal
       </h1>

@@ -19,6 +19,9 @@ import Login from "./page/login.jsx";
 import AdminPortal from "./page/admin/adminportal.jsx";
 import ManagerPortal from "./page/manager/managerportal.jsx";
 import EmployeePortal from "./page/employee/employeeportal.jsx";
+import AdminDashboard from "./page/admin/admindashboard.jsx";
+import ManagerDashboard from "./page/manager/managerdashboard.jsx";
+import EmployeeDashboard from "./page/employee/employeedashboard.jsx";
 
 const MainLayout = ({ children }) => (
   <div className="flex flex-col min-h-screen">
@@ -52,6 +55,14 @@ function App() {
             </MainLayout>
           }
         />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <MainLayout>
+              <AdminDashboard/>
+            </MainLayout>
+          }
+        />
           <Route
           path="/manager/"
           element={
@@ -60,11 +71,27 @@ function App() {
             </MainLayout>
           }
         />
+           <Route
+          path="/manager/dashboard"
+          element={
+            <MainLayout>
+              <ManagerDashboard/>
+            </MainLayout>
+          }
+        />
         <Route
           path="/employee/"
           element={
             <MainLayout>
               <EmployeePortal/>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/employee/dashboard/"
+          element={
+            <MainLayout>
+              <EmployeeDashboard/>
             </MainLayout>
           }
         />
